@@ -1,0 +1,31 @@
+{
+  "name": "imapsod",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node -r dotenv/config server.js dotenv_config_path=.env.local",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "dotenv": "^16.5.0",
+    "imap-simple": "^5.1.0",
+    "mailparser": "^3.7.3",
+    "mongoose": "^8.16.0",
+    "next": "^15.3.4",
+    "postcss": "^8.5.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "tailwindcss": "^3.4.1",
+    "ws": "^8.18.2"
+  }
+}
