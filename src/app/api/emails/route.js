@@ -55,6 +55,7 @@ export async function GET(request) {
         return {
           id: item.attributes.uid,
           from: mail.from ? mail.from.text : 'No sender',
+          to: mail.to ? mail.to.text : 'No recipient',
           subject: mail.subject,
           text: mail.text || '',
           html: mail.html || '',

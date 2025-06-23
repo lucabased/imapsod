@@ -19,6 +19,13 @@ const AccountSchema = new mongoose.Schema({
     enum: ['unknown', 'working', 'burned'],
     default: 'unknown',
   },
+  tags: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tag',
+  }],
+  notes: {
+    type: String,
+  },
 });
 
 export default mongoose.models.Account || mongoose.model('Account', AccountSchema);

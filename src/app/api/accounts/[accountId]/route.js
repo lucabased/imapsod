@@ -2,10 +2,11 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import Account from '@/models/Account';
 import ImapConfig from '@/models/ImapConfig';
+import Tag from '@/models/Tag';
 
 export async function PUT(request, { params }) {
     const { accountId } = params;
-    const { email, password, imapConfig } = await request.json();
+    const { email, password, imapConfig, tags, notes } = await request.json();
 
     await dbConnect();
 
@@ -31,10 +32,19 @@ export async function PUT(request, { params }) {
             account.imapConfig = updatedConfig._id;
         }
         
+        if (tags) {
+            account.tags = tags;
+        }
+
+        if (notes) {
+            account.notes = notes;
+        }
+
         account.status = 'unknown'; // Reset status after editing
         await account.save();
 
-        return NextResponse.json(account);
+        const populatedAccount = await Account.findById(accountId).populate('tags');
+        return NextResponse.json(populatedAccount);
     } catch (error) {
         console.error('Error updating account:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

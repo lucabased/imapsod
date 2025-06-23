@@ -1,11 +1,12 @@
 import dbConnect from '@/lib/db';
 import Account from '@/models/Account';
 import ImapConfig from '@/models/ImapConfig';
+import Tag from '@/models/Tag';
 
 export async function GET() {
   await dbConnect();
   try {
-    const accounts = await Account.find({}).populate('imapConfig');
+    const accounts = await Account.find({}).populate('imapConfig').populate('tags');
     return new Response(JSON.stringify(accounts), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
